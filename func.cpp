@@ -49,3 +49,29 @@ std::string getTimeSlot(TimeSlot ts) {
 
 
 // Task D
+TimeSlot scheduleAfter(TimeSlot ts, Movie nextMovie) {
+    Time endtime = addMinutes(ts.startTime, ts.movie.duration);
+    return {nextMovie, endtime};
+}
+
+
+// Task E
+bool timeOverlap(TimeSlot ts1, TimeSlot ts2) {
+    if (minutesSinceMidnight(ts1.startTime) < minutesSinceMidnight(ts2.startTime)) {
+        if (minutesUntil(ts1.startTime, ts2.startTime) > ts1.movie.duration) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    else {
+        if (minutesUntil(ts1.startTime, ts2.startTime) > ts2.movie.duration) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+}
